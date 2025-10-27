@@ -54,12 +54,6 @@ paths:
           description: The given date for the forecast of interest given as YYYYMMDD (e.g. 20201020). If left blank it defaults to the most recent date. This API provides access to data within the last 30 days.
           type: string
           pattern: '^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(.(00|12)|)$'
-        - name: bias_corrected
-          in: query
-          required: False
-          description: If true, the return data will show improvements based on global bias correction techniques. If false, the data will not be bias corrected.
-          type: boolean
-          default: False
       produces:
         - text/csv
         - application/json
@@ -97,12 +91,6 @@ paths:
           description: The given date for the forecast of interest given as YYYYMMDD (e.g. 20201020). If left blank it defaults to the most recent date. This API provides access to data within the last 30 days.
           type: string
           pattern: '^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(.(00|12)|)$'
-        - name: bias_corrected
-          in: query
-          required: False
-          description: If true, the return data will show improvements based on global bias correction techniques. If false, the data will not be bias corrected.
-          type: boolean
-          default: False
       produces:
         - text/csv
         - application/json
@@ -140,12 +128,6 @@ paths:
           enum:
             - csv
             - json
-        - name: bias_corrected
-          in: query
-          required: False
-          description: If true, the return data will show improvements based on global bias correction techniques. If false, the data will not be bias corrected.
-          type: boolean
-          default: False
       produces:
         - text/csv
         - application/json
@@ -214,12 +196,6 @@ paths:
           description: A date in YYYYMMDD format when you would like to start retrieving forecast record data. Defaults to None so no records would be retrieved if this parameter is not specified.
           type: string
           pattern: '^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$'
-        - name: bias_corrected
-          in: query
-          required: False
-          description: If true, the return data will show improvements based on global bias correction techniques. If false, the data will not be bias corrected.
-          type: boolean
-          default: False
       produces:
         - application/json
       responses:
@@ -263,12 +239,6 @@ paths:
           description: A date in YYYYMMDD format of the latest simulation date to retrieve. Simulated values on or before the specified date are returned. Defaults to the most recent date.
           type: string
           pattern: '^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$'
-        - name: bias_corrected
-          in: query
-          required: False
-          description: If true, the return data will show improvements based on global bias correction techniques. If false, the data will not be bias corrected.
-          type: boolean
-          default: False
       produces:
         - text/csv
         - application/json
@@ -313,12 +283,6 @@ paths:
           description: A date in YYYYMMDD format of the latest simulation date to retrieve. Simulated values on or before the specified date are returned. Defaults to the most recent date.
           type: string
           pattern: '^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$'
-        - name: bias_corrected
-          in: query
-          required: False
-          description: If true, the return data will show improvements based on global bias correction techniques. If false, the data will not be bias corrected.
-          type: boolean
-          default: False
       produces:
         - text/csv
         - application/json
@@ -395,12 +359,6 @@ paths:
           enum:
             - csv
             - json
-        - name: bias_corrected
-          in: query
-          required: False
-          description: If true, the return data will show improvements based on global bias correction techniques. If false, the data will not be bias corrected.
-          type: boolean
-          default: False
       produces:
         - text/csv
         - application/json
@@ -433,12 +391,6 @@ paths:
           enum:
             - csv
             - json
-        - name: bias_corrected
-          in: query
-          required: False
-          description: If true, the return data will show improvements based on global bias correction techniques. If false, the data will not be bias corrected.
-          type: boolean
-          default: False
       produces:
         - text/csv
         - application/json
@@ -471,12 +423,6 @@ paths:
           enum:
             - csv
             - json
-        - name: bias_corrected
-          in: query
-          required: False
-          description: If true, the return data will show improvements based on global bias correction techniques. If false, the data will not be bias corrected.
-          type: boolean
-          default: False
       produces:
         - text/csv
         - application/json
@@ -510,12 +456,6 @@ paths:
           enum:
             - csv
             - json
-        - name: bias_corrected
-          in: query
-          required: False
-          description: If true, the return data will show improvements based on global bias correction techniques. If false, the data will not be bias corrected.
-          type: boolean
-          default: False
       produces:
         - text/csv
         - application/json

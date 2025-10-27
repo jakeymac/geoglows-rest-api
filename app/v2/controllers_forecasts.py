@@ -114,7 +114,7 @@ def forecast(river_id: int, date: str, return_format: str, bias_corrected: bool 
     df.index.name = "datetime"
     if bias_corrected:
         df.index = pd.to_datetime(df.index)
-        data = geoglows.bias.sfdc_bias_correction(df, river_id).round(NUM_DECIMALS)
+        data = geoglows.bias.discharge_transform(df, river_id).round(NUM_DECIMALS)
         data = data.merge(df.add_suffix("_original"), left_index=True, right_index=True, how="left")
 
         if return_format == "csv":
@@ -163,10 +163,9 @@ def forecast_stats(
     df.index.name = "datetime"
     df = df.astype(np.float64).round(NUM_DECIMALS)
     if bias_corrected:
-        print("IN BIAS CORRECTED")
         df.index = pd.to_datetime(df.index)
         df = df.drop(columns=["high_res"])
-        data = geoglows.bias.sfdc_bias_correction(df, river_id).round(NUM_DECIMALS)
+        data = geoglows.bias.discharge_transform(df, river_id).round(NUM_DECIMALS)
         data = data.merge(df.add_suffix("_original"), left_index=True, right_index=True, how="left")
 
         if return_format == "csv":
@@ -203,7 +202,7 @@ def forecast_ensemble(river_id: int, date: str, return_format: str, bias_correct
     if bias_corrected:
         df.index = pd.to_datetime(df.index)
         df = df.drop(columns=["ensemble_52"])
-        data = geoglows.bias.sfdc_bias_correction(df, river_id).round(NUM_DECIMALS)
+        data = geoglows.bias.discharge_transform(df, river_id).round(NUM_DECIMALS)
         data = data.merge(df.add_suffix("_original"), left_index=True, right_index=True, how="left")
 
         if return_format == "csv":
