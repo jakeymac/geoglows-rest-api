@@ -1,6 +1,7 @@
 
 import logging
 import traceback
+import pandas as pd
 
 import geoglows
 from flask import Blueprint, request, jsonify
@@ -21,6 +22,7 @@ from .controllers_historical import (retrospective_hourly,
                                      yearly_averages,
                                      return_periods)
 from .controllers_misc import get_river_id
+from datetime import datetime
 
 logger = logging.getLogger("DEBUG")
 
@@ -218,20 +220,14 @@ def get_year_difference(start_date, end_date):
     """ Calculate the difference in years between two dates in YYYYMMDD format.
     If the format is invalid, raises a ValueError. """
     try:
-        start_year = int(start_date[:4])
-        start_month = int(start_date[4:6])
-        end_year = int(end_date[:4])
-        end_month = int(end_date[4:6])
-        start_day = int(start_date[6:8])
-        end_day = int(end_date[6:8])
+        start = pd.to_datetime(start_date)
+        end = pd.to_datetime(end_date)
         
-        year_diff = end_year - start_year
-        month_diff = end_month - start_month
-        day_diff = end_day - start_day
+        year_diff = end.year - start.year
         
-        # If there are additional months or days, count it as part of the year difference
-        if month_diff > 0 or (month_diff == 0 and day_diff > 0):
-            year_diff += 1
+        # If end date hasn't reached the same month/day as start date, subtract 1
+        if (end.month, end.day) < (start.month, start.day):
+            year_diff -= 1
         
         return year_diff
     except Exception:
