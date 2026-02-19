@@ -1,3 +1,4 @@
+
 import logging
 import traceback
 
@@ -41,6 +42,11 @@ def rest_endpoints_v2(product: str, river_id: int = None):
                 river_id=river_id,
                 return_format=return_format,
                 source=request.args.get('source', 'other'), )
+
+    if 'retrospective' in product and start_date is not None and end_date is not None:
+        year_difference = get_year_difference(start_date, end_date)
+        if year_difference > 10:
+            return jsonify({'error': f'Please limit the date range to 10 years or less.'}), 400
 
     # forecast data products
     if product == 'dates':
@@ -207,3 +213,26 @@ def errors_value_error(e: ValueError):
 def errors_general_exception(e: Exception):
     logger.debug(traceback.format_exc())
     return jsonify({"error": f"An unexpected error occurred: {e}"}), 500
+
+def get_year_difference(start_date, end_date):
+    """ Calculate the difference in years between two dates in YYYYMMDD format.
+    If the format is invalid, raises a ValueError. """
+    try:
+        start_year = int(start_date[:4])
+        start_month = int(start_date[4:6])
+        end_year = int(end_date[:4])
+        end_month = int(end_date[4:6])
+        start_day = int(start_date[6:8])
+        end_day = int(end_date[6:8])
+        
+        year_diff = end_year - start_year
+        month_diff = end_month - start_month
+        day_diff = end_day - start_day
+        
+        # If there are additional months or days, count it as part of the year difference
+        if month_diff > 0 or (month_diff == 0 and day_diff > 0):
+            year_diff += 1
+        
+        return year_diff
+    except Exception:
+        raise ValueError('Invalid date format for start_date or end_date. Use YYYYMMDD format.')
