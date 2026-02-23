@@ -14,7 +14,6 @@ env:
 jobs:
   deploy:
     name: Deploy to Staging
-    if: startswith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     
     steps:
